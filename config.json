@@ -1,0 +1,57 @@
+{
+  "signing": {
+    "_comment": "keyAlias/dname 留空 = 生成新签名密钥时按当前项目自动派生；显式填写可强制指定。已有 .signing 材料的项目（如 BiliTogether）始终复用、不受影响",
+    "keyAlias": "",
+    "dname": ""
+  },
+  "android": {
+    "acceptLicenses": false,
+    "targetApiLevel": 34,
+    "useMirror": true,
+    "mirrorBase": "https://mirrors.cloud.tencent.com/AndroidSDK"
+  },
+  "jdk": {
+    "requiredMajorVersion": 17,
+    "autoDetect": true,
+    "binaryUrl": "https://api.adoptium.net/v3/binary/latest/{0}/ga/windows/x64/jdk/hotspot/normal/eclipse",
+    "releaseInfoUrl": "https://api.adoptium.net/v3/assets/latest/{0}/ga?vendor=eclipse&os=windows&arch=x64&image_type=jdk",
+    "githubRepo": "adoptium/temurin{0}-binaries",
+    "githubReleaseApi": "https://api.github.com/repos/{0}/releases?per_page=10"
+  },
+  "node": {
+    "distIndexUrl": "https://nodejs.org/dist/index.json",
+    "assetSuffix": "win-x64.zip"
+  },
+  "git": {
+    "mirrorInsteadOf": "https://gh-proxy.com/https://github.com/"
+  },
+  "download": {
+    "proxyPrefix": "https://gh-proxy.com/",
+    "maxRetries": 3,
+    "requestTimeoutSec": 10,
+    "downloadTimeoutSec": 1800,
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) BuildHelper/1.0",
+    "jdkProxyPrefixes": [
+      "",
+      "https://gh-proxy.com/"
+    ],
+    "androidRepositoryXml": "https://dl.google.com/android/repository/repository2-1.xml",
+    "androidSdkDownloadTimeoutSec": 180
+  },
+  "cordova": {
+    "_comment": "Cordova 构建配置；npmRegistry 默认使用 npmmirror 国内镜像加速下载；jdkMajorVersion 默认 auto 按 cordova-android 版本自动选择（>=12→17、10~11→11、<=9→8），老项目可强制 8",
+    "cliVersion": "latest",
+    "npmRegistry": "https://registry.npmmirror.com",
+    "androidPlatformVersion": "",
+    "buildDebug": true,
+    "jdkMajorVersion": "auto"
+  },
+  "paths": {
+    "globalToolsRoot": "C:\\APKTools",
+    "mobileSubPath": ""
+  },
+  "requirements": {
+    "installSdk": true,
+    "installNdk": "ask"
+  }
+}

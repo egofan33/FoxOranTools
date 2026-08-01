@@ -1,0 +1,11 @@
+# 签名材料（含明文密码，切勿提交）
+.signing/
+
+# 构建产物
+release/
+local.properties
+
+# Expo / Metro / 依赖缓存
+.expo/
+.expo-home/
+node_modules/

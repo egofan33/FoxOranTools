@@ -1,0 +1,77 @@
+{
+  "_comment": "复制本文件为 config.json 后按需修改；未填写项将使用模块内默认值。",
+  "signing": {
+    "_comment": "keyAlias/dname 留空 = 生成新签名密钥时按当前项目自动派生（包名末段→alias、应用名→dname CN），避免跨项目共用身份；显式填写可强制指定。已有 {项目}\\.signing 材料的项目始终复用、不受影响",
+    "keyAlias": "",
+    "dname": ""
+  },
+  "android": {
+    "acceptLicenses": false,
+    "targetApiLevel": 34,
+    "useMirror": true,
+    "mirrorBase": "https://mirrors.cloud.tencent.com/AndroidSDK"
+  },
+  "jdk": {
+    "_comment": "requiredMajorVersion: 默认 JDK 主版本；autoDetect: true 时按项目自动选择（RN >=0.73→17、<=0.72→11；AGP >=8→17、7.x→11、<7→8），false 时始终使用 requiredMajorVersion",
+    "requiredMajorVersion": 17,
+    "autoDetect": true,
+    "binaryUrl": "https://api.adoptium.net/v3/binary/latest/{0}/ga/windows/x64/jdk/hotspot/normal/eclipse",
+    "releaseInfoUrl": "https://api.adoptium.net/v3/assets/latest/{0}/ga?vendor=eclipse&os=windows&arch=x64&image_type=jdk",
+    "githubRepo": "adoptium/temurin{0}-binaries",
+    "githubReleaseApi": "https://api.github.com/repos/{0}/releases?per_page=10"
+  },
+  "node": {
+    "distIndexUrl": "https://nodejs.org/dist/index.json",
+    "assetSuffix": "win-x64.zip"
+  },
+  "flutter": {
+    "_comment": "Flutter SDK 与 pub 依赖的国内镜像",
+    "storageBaseUrl": "https://storage.flutter-io.cn",
+    "pubHostedUrl": "https://pub.flutter-io.cn"
+  },
+  "cordova": {
+    "_comment": "Cordova 构建配置；npmRegistry 默认使用 npmmirror 国内镜像加速下载（会话级注入，不改全局 npm 配置）；androidPlatformVersion 留空时尊重项目 config.xml engine / package.json 锁定版本；jdkMajorVersion 默认 auto 按 cordova-android 版本自动选择（>=12→17、10~11→11、<=9→8），老项目可强制 8",
+    "cliVersion": "latest",
+    "npmRegistry": "https://registry.npmmirror.com",
+    "androidPlatformVersion": "",
+    "buildDebug": true,
+    "jdkMajorVersion": "auto"
+  },
+  "gradle": {
+    "_comment": "cordova-android ≥15 构建时需 PATH 上的 Gradle 引导生成 wrapper（缺失时经华为云/腾讯云镜像自动下载便携版，约 130MB）；bootstrapVersion 留空时自动对齐 cordova-android 的 GRADLE_VERSION，也可显式填写如 \"8.14.2\" 强制指定",
+    "bootstrapVersion": ""
+  },
+  "git": {
+    "_comment": "Flutter 工具链运行时依赖 git；系统 PATH 无 git 时自动下载便携 MinGit（约 46MB）。mingitUrl 填 GitHub 原始地址即可，下载时自动拼接 download.proxyPrefix 镜像前缀（镜像优先、直连兜底）。mirrorInsteadOf 为 pubspec git 依赖的全局 GitHub 镜像重写目标（会话级注入，不改 .gitconfig），留空则按 mirrorCandidates 探测选定全局镜像；构建时还会对每个 git 依赖仓库逐一验证通道可用性，个别仓库在镜像上 502/未收录时自动改走其他候选或直连",
+    "mingitUrl": "https://github.com/git-for-windows/git/releases/download/v2.46.0.windows.1/MinGit-2.46.0-64-bit.zip",
+    "mirrorInsteadOf": "",
+    "mirrorCandidates": [
+      "https://gh-proxy.com/https://github.com/",
+      "https://gitclone.com/github.com/"
+    ]
+  },
+  "download": {
+    "proxyPrefix": "https://gh-proxy.com/",
+    "maxRetries": 3,
+    "requestTimeoutSec": 10,
+    "downloadTimeoutSec": 1800,
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) BuildHelper/1.0",
+    "jdkProxyPrefixes": [
+      "",
+      "https://gh-proxy.com/"
+    ],
+    "androidRepositoryXml": "https://dl.google.com/android/repository/repository2-1.xml",
+    "androidSdkDownloadTimeoutSec": 180
+  },
+  "paths": {
+    "globalToolsRoot": "C:\\APKTools",
+    "mobileSubPath": "",
+    "_gradleUserHomeComment": "GRADLE_USER_HOME 路径模板，{project} 会替换为项目短标识。保持短前缀可避免 RN C++ 构建路径超过 Win32 260 字符上限",
+    "gradleUserHome": "C:\\APKTools\\g\\{project}"
+  },
+  "requirements": {
+    "_comment": "构建前按项目声明检测并补装缺失的 SDK 组件；installSdk 控制 platform/build-tools 自动补装（包小，默认 true免确认）；installNdk 控制 NDK 补装策略（ask=默认询问/always=直接装/never=跳过），NDK 约 1-2GB 建议国内镜像预装以避免构建时从 Google 下载极度缓慢",
+    "installSdk": true,
+    "installNdk": "ask"
+  }
+}
